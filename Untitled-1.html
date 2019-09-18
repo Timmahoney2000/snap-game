@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: verdana;
+            font-size: 15pt;
+            color: #f5ff00;
+            background-color: #959d9b;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        header {
+            /*border: 1px solid black; */
+            width: 90%;
+            height: 50px;
+            margin: 0 auto;
+
+
+        }
+
+        #r {
+            float: left;
+            margin: auto;
+        }
+
+        #w {
+            float: right;
+            margin: auto;
+        }
+
+        #snap {
+            font-size: 100pt;
+            font-weight: bold;
+        }
+
+        #overlay {
+            widows: 700px;
+            height: 400px;
+            border: 1px solid red;
+            position: absolute;
+            left: 15%;
+            top: 200px;
+            z-index: 5;
+            display: none;
+            background-size: contain;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+        footer {
+            border: 1px solid black;
+            width: 80%;
+            height: 100px;
+            margin: 50px;
+
+        }
+
+        #correct {
+            float: left;
+        }
+
+        #incorrect {
+            float: right;
+        }
+
+    </style>
+
+
+
+
+</head>
+
+<body onload="play()">
+    <header>
+        <h2 id="r">Right = 0</h2>
+        <h2 id="w">Wrong = 0</h2>
+    </header>
+
+    <main>
+        <h1 id="snap"></h1>
+    </main>
+    
+
+    <div id="overlay"></div>
+       <footer>
+        <h2 id="correct"><a href="#" onclick="play('correct')">Correct</a></h2>
+        <h2 id="incorrect"><a href="#" onclick="play('incorrect')">Incorrect</a></h2>
+
+        </footer>
+
+        <script>
+            
+            var word = new Array("the", "I", "to", "a", "is", "my", "go", "me", "like", "on", "in", "so", "we", "it", "and", "up", "at", "see", "he", "do", "you", "an", "can", "no", "am", "went", "are", "this", "look", "for", "get", "come", "got", "play", "was", "had", "they", "will", "too", "all", "be", "as", "ball", "by", "day", "did", "has", "her", "him", "fun", "eat", "if", "jump", "man", "or", "not", "mom", "out", "now", "of", "put", "ran", "sat", "read", "run", "she", "sit", "then", "his", "say", "us", "yes", "saw", "girl", "how", "when", "back", "your", "about", "from", "than", "away", "them", "came", "big", "been", "after", "who", "I'm", "very", "could", "have", "make", "any", "into", "there", "were", "mother", "just", "little", "two", "going", "here", "but", "that", "said", "over", "don't", "our", "what", "three", "their", "where", "want", "today", "home", "down", "under", "much", "love", "know", "take", "let");
+
+
+            let right = 0;
+            let wrong = 0;
+
+            function score(foo) {
+                
+
+                if (foo == "correct") {
+                    right++; //right= right +1
+
+
+                    var audio = new Audio('sounds/cheer.mp3');
+audio.play();
+
+                    document.getElementById("overlay").style.display = "block";
+                    document.getElementById("overlay").style.backgroundImage = "url(images/correct.jpg)";
+
+                    document.getElementById("r").innerHTML = "Right = " + right;
+
+                    if (audio.ended) {
+                        document.getElementById("overlay").style.display = "hidden";
+                    }
+                }
+
+                if (foo == "incorrect") {
+                    wrong++; //wrong= wrong +1
+                    var audio = new Audio('sounds/aauuu.wav');
+                    audio.play();
+
+                    
+                    document.getElementById("w").innerHTML = "Wrong = " + wrong;
+
+                }
+
+            }
+
+
+
+
+
+            function play(foo) {
+
+                var instance = Math.floor(Math.random() * word.length);
+
+                document.getElementById("snap").innerHTML = word[instance];
+
+                score(foo);
+            }
+
+        </script>
+
+
+
+</body>
+
+</html>
